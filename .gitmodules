@@ -1,0 +1,3 @@
+[submodule "llama_repo"]
+	path = llama_repo
+	url = https://github.com/meta-llama/llama.git
