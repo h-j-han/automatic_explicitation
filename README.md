@@ -31,21 +31,21 @@ First, This section describes how we collect and examine naturally-occurring exp
 Code will be provided in the near future.
 
 ## Automatic Explicitation
-This section builds on WikiExpl to explore generating explicitations automatically.
-We use the XQB dataset, which contains parallel question pairs in English and various non-English languages.
-For more details of [xQB dataset](https://aclanthology.org/2022.emnlp-main.378/) and [Quizbowl task](https://arxiv.org/abs/1904.04792), please refer to each links.
-The original XQB dataset is from https://github.com/h-j-han/simqa and original quizbowl evaluation code is from https://github.com/Pinafore/qb.
+This section builds on WikiExpl to explore generating explicitations automatically.  
+We use the XQB dataset, which contains parallel question pairs in English and various non-English languages.  
+For more details of [xQB dataset](https://aclanthology.org/2022.emnlp-main.378/) and [Quizbowl task](https://arxiv.org/abs/1904.04792), please refer to each links.  
+The original XQB dataset is from https://github.com/h-j-han/simqa and original quizbowl evaluation code is from https://github.com/Pinafore/qb.  
 
-1. Generate guesses
-We are using LLaMA model to generate guesses from https://github.com/meta-llama/llama/tree/57b0eb62de0636e75af471e49e2f1862d908d9d8. You can `git submodule update --init --recursive` to get a certain repo.
-In `xqb_eval/extrinsic/rawresult*`, we provided our results.
-If you want to replicate our result from scratch, the model download is required.
+1. Generate guesses  
+We are using LLaMA model to generate guesses from https://github.com/meta-llama/llama/tree/57b0eb62de0636e75af471e49e2f1862d908d9d8. You can `git submodule update --init --recursive` to get a certain repo.  
+In `xqb_eval/extrinsic/rawresult*`, we provided our results.  
+If you want to replicate our result from scratch, the model download is required.  
 ```
 $ ./gen_guess_llama.sh # set start index and end index of the questions if it takes too long for the entire set
 ```
 You can merge pieces with `autoexpl/xqb/merge_split_guess.py`.
 
-2. Parse raw text output
+2. Parse raw text output  
 Input is `rawresult*` and output is `LLaMA*`
 ```
 python autoexpl/xqb/parse_raw_guesses_llama_step.py --lang pl  --dataset-name plqbv1ht512 --ckpt-dir /13B
@@ -53,7 +53,7 @@ python autoexpl/xqb/parse_raw_guesses_llama_step.py --lang en  --dataset-name pl
 python autoexpl/xqb/parse_raw_guesses_llama_step.py --lang es  --dataset-name esqbv1htall --ckpt-dir /7B
 python autoexpl/xqb/parse_raw_guesses_llama_step.py --lang en  --dataset-name esqbv1htall --ckpt-dir /7B
 ```
-3. Gather results
+3. Gather results  
 Input is `LLaMA*` and output is  `origvsexp*`
 ```
 python autoexpl/xqb/gather_guessbuzz_llama.py
