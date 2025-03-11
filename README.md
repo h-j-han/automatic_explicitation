@@ -61,6 +61,19 @@ python autoexpl/xqb/gather_guessbuzz_llama.py
 
 Finally, we provide `plot.ipynb` to reproduce the plots in our paper.
 
+### Structure
+- `orig_qid` corresponds to question id in [XQB](https://github.com/h-j-han/simqa).
+- `ent_id` is the id of an entity detected in the question text, appending two digits on `oriq_qid`.
+- `exp_id` is a different version of explicitation generations, appending two digits on `ent_id`.
+
+Try `python autoexpl/xqb/display_explicitation.py' for highlighted text display of XQB explicitations.
+
+### Human Evaluation
+Three human evaluation results are in `xqb_eval/intrinsic`. 
+All entitiys were shown to annotators to evaluate is the decisions on the entity was helpful or not.
+An entity has three version of explicitation with different generation types and integration. Only one explicitation generation per entity was shown to one annotator.
+
+
 ## Reference
 ```
 @inproceedings{han-etal-2023-auto-explicitation,
