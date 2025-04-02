@@ -29,9 +29,9 @@ def parse_args():
     parser.add_argument("--nguess", type=int, default=1, required=False, 
                         help='num of nguess')
     parser.add_argument("--start", type=int, default=0, required=False, 
-                        help='num of nguess') #1895
-    parser.add_argument("--end", type=int, default=5, required=False, 
-                        help='num of nguess') #3789
+                        help='starting index of question for each batch') 
+    parser.add_argument("--end", type=int, default=-1, required=False, 
+                        help='ending index of question for each batch, -1 means the entire dataset') 
     parser.add_argument("--version-name", type=str, help="dataset name", required=False, 
                         default='pair_coment_charentskip_dedup_gent4')
     parser.add_argument("--lang", type=str, help="source language", required=False, default='en')
