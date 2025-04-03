@@ -30,11 +30,24 @@ First, This section describes how we collect and examine naturally-occurring exp
 
 Code will be provided in the near future.
 
-## Automatic Explicitation
+## Evaluating Automatic Explicitation
 This section builds on WikiExpl to explore generating explicitations automatically.  
 We use the XQB dataset, which contains parallel question pairs in English and various non-English languages.  
 For more details of [xQB dataset](https://aclanthology.org/2022.emnlp-main.378/) and [Quizbowl task](https://arxiv.org/abs/1904.04792), please refer to each links.  
 The original XQB dataset is from https://github.com/h-j-han/simqa and original quizbowl evaluation code is from https://github.com/Pinafore/qb.  
+
+### Input Data
+`xqb_eval/plqbv1ht512.pair_coment_charentskip_dedup_gent4.xxxx.exp.json`: contains all the details of explicitation from which entity in which part of the question to what types of explicitation and what explanation to be added.  
+- `orig_qid` corresponds to question id in [XQB](https://github.com/h-j-han/simqa).
+- `ent_id` is the id of an entity detected in the question text, appending two digits on `oriq_qid`.
+- `exp_id` is a different version of explicitation generations, appending two digits on `ent_id`.
+
+`xqb_eval/extrinsic/plqbv1ht512.pair_coment_charentskip_dedup_gent4.xx.json`: realization of each explicitation within the question based on `*.xxxx.exp.json`. This is to be consumed by the guesser.
+- `qanta_id` is `exp_id` above.
+
+
+Try `python autoexpl/xqb/display_explicitation.py' for highlighted text display of XQB explicitations.
+
 
 ### Generate guesses  
 We are using LLaMA model to generate guesses from https://github.com/meta-llama/llama/tree/57b0eb62de0636e75af471e49e2f1862d908d9d8. You can `git submodule update --init --recursive` to get a certain repo.  
@@ -61,12 +74,6 @@ python autoexpl/xqb/gather_guessbuzz_llama.py
 
 Finally, we provide `plot.ipynb` to reproduce the plots in our paper.
 
-### Structure
-- `orig_qid` corresponds to question id in [XQB](https://github.com/h-j-han/simqa).
-- `ent_id` is the id of an entity detected in the question text, appending two digits on `oriq_qid`.
-- `exp_id` is a different version of explicitation generations, appending two digits on `ent_id`.
-
-Try `python autoexpl/xqb/display_explicitation.py' for highlighted text display of XQB explicitations.
 
 ### Human Evaluation
 Three human evaluation results are in `xqb_eval/intrinsic`. 
